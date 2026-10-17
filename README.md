@@ -25,7 +25,7 @@ When Steam Big Picture is launched through a game-streaming host, exiting Big Pi
 - **Stream-friendly exit:** The launcher and cleanup helper run separately so the cleanup does not need to be placed in Apollo's Undo Command.
 - **Controller Guide-button handling:** Temporarily disables Windows Game Bar's Xbox/Guide-button interception during the session, then restores the original setting afterward.
 - **Optional startup movie override:** Offers to suppress the Big Picture startup movie with a blank override, and can restore the normal movie later.
-- **Automatic Apollo setup instructions:** Copies the required launch command to the clipboard, opens Apollo's web interface, and displays step-by-step instructions in Notepad.
+- **Automatic Apollo/Sunshine setup instructions:** Copies the required launch command to the clipboard, opens the host's web interface, and displays step-by-step instructions in Notepad. The setup should also work with Sunshine, although it has only been tested with Apollo.
 - **Diagnostic logging:** Records Steam window cleanup activity to a log that is replaced on each new session.
 
 ## Requirements
