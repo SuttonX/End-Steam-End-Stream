@@ -46,7 +46,7 @@ When Steam Big Picture is launched through a game-streaming host, exiting Big Pi
 4. The installer writes the launcher to:
 
    ```text
-   %LOCALAPPDATA%\Apollo\SteamBigPicture.ps1
+   %LOCALAPPDATA%\ESES\SteamBigPicture.ps1
    ```
 
 5. The installer copies the Apollo launch command to your clipboard, opens `https://localhost:47990`, and displays setup instructions in Notepad.
@@ -70,7 +70,7 @@ When Steam Big Picture is launched through a game-streaming host, exiting Big Pi
 The generated Command will resemble this (the installer supplies your actual Windows profile path):
 
 ```powershell
-powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Users\YOUR_USER\AppData\Local\Apollo\SteamBigPicture.ps1"
+powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Users\YOUR_USER\AppData\Local\ESES\SteamBigPicture.ps1"
 ```
 
 ## How it works
@@ -102,7 +102,7 @@ Changing the startup movie may restart Steam. The installer attempts to restart 
 - Run another session and inspect the cleanup log:
 
   ```text
-  %LOCALAPPDATA%\Apollo\SteamBigPicture-Cleanup.log
+  %LOCALAPPDATA%\ESES\SteamBigPicture-Cleanup.log
   ```
 
   To copy the last 200 lines to your clipboard, run this in PowerShell:
@@ -127,17 +127,17 @@ The cleanup log is **overwritten for each new session**, not appended indefinite
 
 | File | Purpose |
 | --- | --- |
-| `%LOCALAPPDATA%\Apollo\SteamBigPicture.ps1` | Installed streaming launcher |
-| `%LOCALAPPDATA%\Apollo\SteamBigPicture.ps1.bak` | Backup of an existing launcher when reinstalling |
-| `%LOCALAPPDATA%\Apollo\SteamBigPicture-Cleanup.log` | Per-session diagnostic log |
-| `%TEMP%\SteamBigPicture-Apollo-Instructions.txt` | Apollo setup instructions |
+| `%LOCALAPPDATA%\ESES\SteamBigPicture.ps1` | Installed streaming launcher |
+| `%LOCALAPPDATA%\ESES\SteamBigPicture.ps1.bak` | Backup of an existing launcher when reinstalling |
+| `%LOCALAPPDATA%\ESES\SteamBigPicture-Cleanup.log` | Per-session diagnostic log |
+| `%TEMP%\SteamBigPicture-ESES-Instructions.txt` | Apollo setup instructions |
 
 If selected, the optional startup-movie override is created inside Steam's `config\uioverrides\movies` folder.
 
 ## Uninstall
 
 1. In Apollo, remove this launcher's **Command** from the Steam Big Picture application entry, or restore your previous command.
-2. Delete `%LOCALAPPDATA%\Apollo\SteamBigPicture.ps1` if you no longer need it. You can also remove its `.bak` and the diagnostic log.
+2. Delete `%LOCALAPPDATA%\ESES\SteamBigPicture.ps1` if you no longer need it. You can also remove its `.bak` and the diagnostic log.
 3. If you enabled the optional startup-movie override, run the BAT file and choose to **restore** the original movie before deleting the installer.
 
 The temporary Game Bar setting is designed to be restored when the launcher exits normally. If Windows or PowerShell is forcibly terminated, check the Game Bar setting manually if the Guide button behaves differently afterward.
