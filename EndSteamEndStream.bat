@@ -10,7 +10,7 @@ del /q "%SS_PAYLOAD%" >nul 2>&1
 if "%SS_EXIT%"=="20" (
     echo.
     echo Startup movie restoration is complete.
-    echo No launcher installation or Apollo setup was performed.
+    echo No launcher installation or streaming host setup was performed.
     echo To install the launcher, run this BAT file again.
     echo.
     pause
@@ -116,7 +116,7 @@ function Update-Movie([string]$action, [string]$movie) {
     }
 }
 
-$installDir = Join-Path $env:LOCALAPPDATA 'Apollo'
+$installDir = Join-Path $env:LOCALAPPDATA 'ESES'
 $launcherPath = Join-Path $installDir 'SteamBigPicture.ps1'
 $markerPath = Join-Path $installDir 'SteamBigPicture.MovieOverrideOwned'
 $steamExe = Find-Steam
@@ -133,11 +133,11 @@ if ($steamExe) {
                     Update-Movie 'remove' $movie
                     Remove-Item -LiteralPath $markerPath -Force -ErrorAction SilentlyContinue
                     $changed = $true
-                    # Restoration-only run: do not install the launcher or open Apollo.
+                    # Restoration-only run: do not install the launcher or open the streaming host setup.
                     Restart-SteamSilent $steamExe
                     Write-Host ''
                     Write-Host 'The blank startup movie override was removed.'
-                    Write-Host 'No launcher installation or Apollo setup was performed.'
+                    Write-Host 'No launcher installation or streaming host setup was performed.'
                     Write-Host 'Run this BAT again if you want to install the launcher.'
                     exit 20
                 }
@@ -196,7 +196,7 @@ public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntP
     # Prepare desktop Steam cleanup while Big Picture is still running.
     # Launching the helper cannot delay Apollo's disconnect at exit time.
     $cleanup = {
-        $logPath = Join-Path (Join-Path $env:LOCALAPPDATA 'Apollo') 'SteamBigPicture-Cleanup.log'
+        $logPath = Join-Path (Join-Path $env:LOCALAPPDATA 'ESES') 'SteamBigPicture-Cleanup.log'
         function Log-Cleanup([string]$message) {
             try {
                 Add-Content -LiteralPath $logPath -Encoding UTF8 -Value ('{0:yyyy-MM-dd HH:mm:ss.fff} [PID {1}] {2}' -f (Get-Date), $PID, $message)
@@ -272,12 +272,12 @@ finally {
 
 $command = 'powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "' + $launcherPath + '"'
 Set-Clipboard -Value $command
-$instructionsPath = Join-Path $env:TEMP 'SteamBigPicture-Apollo-Instructions.txt'
+$instructionsPath = Join-Path $env:TEMP 'SteamBigPicture-ESES-Instructions.txt'
 $instructions = @"
-Steam Big Picture - Apollo Setup
+Steam Big Picture - Apollo / Sunshine Setup
 ================================
 
-The Apollo Command has already been copied to your clipboard:
+The streaming host Command has already been copied to your clipboard:
 
 $command
 
@@ -297,7 +297,7 @@ $command
    The launcher closes only Steam's windows, not the Steam client.
    Do not add an Undo Command or Command Preparations rows.
    Cleanup diagnostics are saved to:
-   %LOCALAPPDATA%\Apollo\SteamBigPicture-Cleanup.log
+   %LOCALAPPDATA%\ESES\SteamBigPicture-Cleanup.log
 8. Click the Save button (at the top or bottom of the page).
 
 You do not need to change the other settings or checkboxes.
