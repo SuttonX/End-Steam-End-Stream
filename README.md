@@ -8,21 +8,21 @@ Made for **Apollo/Sunshine hosts** and **Artemis/Moonlight clients**. The instal
 
 1. **[Download `EndSteamEndStream.bat`](https://raw.githubusercontent.com/SuttonX/End-Steam-End-Stream/main/EndSteamEndStream.bat)** and save it to your Windows host PC.
 2. **Double-click the downloaded BAT file** and follow the installer prompts. There is nothing to extract and no separate PowerShell script to download.
-3. Follow the Notepad instructions the installer opens to set up the **Steam Big Picture** application in Apollo. The installer also copies the application **Command** to your clipboard.
-4. Make sure **both Apollo continuation checkboxes** are enabled as shown below. Save the application settings.
+3. Follow the Notepad instructions the installer opens to set up the **Steam Big Picture** application in Apollo or Sunshine. The installer also copies the application **Command** to your clipboard.
+4. Make sure **both streaming continuation checkboxes** are enabled as shown below. Save the application settings.
 5. Connect through Artemis/Moonlight and launch the configured Steam Big Picture app. When you're done, use Big Picture's **Power menu to exit**: the stream ends and the leftover Steam desktop window closes automatically, while Steam remains running in the tray.
 
 For the full configuration and troubleshooting details, see the sections below.
 
 ## Why use it?
 
-When Steam Big Picture is launched through a game-streaming host, exiting Big Picture can leave Steam's regular desktop window open on the host PC, or leave the stream active longer than expected. This launcher handles **both** parts of the exit: it allows Apollo to end the streaming session and automatically closes Steam's desktop window. Steam continues running in the system tray.
+When Steam Big Picture is launched through a game-streaming host, exiting Big Picture can leave Steam's regular desktop window open on the host PC, or leave the stream active longer than expected. This launcher handles **both** parts of the exit: it allows Apollo or Sunshine to end the streaming session and automatically closes Steam's desktop window. Steam continues running in the system tray.
 
 ### Features
 
 - **One BAT file:** No separate PowerShell files to download or configure manually.
 - **Two automatic actions on exit:** Ends the Artemis/Moonlight streaming session **and** closes the regular Steam desktop window after exiting Big Picture via its Power menu; **does not terminate the Steam client**.
-- **Stream-friendly exit:** The launcher and cleanup helper run separately so the cleanup does not need to be placed in Apollo's Undo Command.
+- **Stream-friendly exit:** The launcher and cleanup helper run separately so the cleanup does not need to be placed in the streaming host's Undo Command.
 - **Controller Guide-button handling:** Temporarily disables Windows Game Bar's Xbox/Guide-button interception during the session, then restores the original setting afterward.
 - **Optional startup movie override:** Offers to suppress the Big Picture startup movie with a blank override, and can restore the normal movie later.
 - **Automatic Apollo/Sunshine setup instructions:** Copies the required launch command to the clipboard, opens the host's web interface, and displays step-by-step instructions in Notepad. The setup should also work with Sunshine, although it has only been tested with Apollo.
@@ -49,11 +49,11 @@ When Steam Big Picture is launched through a game-streaming host, exiting Big Pi
    %LOCALAPPDATA%\ESES\SteamBigPicture.ps1
    ```
 
-5. The installer copies the Apollo launch command to your clipboard, opens `https://localhost:47990`, and displays setup instructions in Notepad.
-6. In Apollo, open **Applications**, then edit your **Steam Big Picture** application entry. Paste the copied text into its **Command** field.
-7. Configure the Apollo application as shown below and **Save**.
+5. The installer copies the Apollo/Sunshine launch command to your clipboard, opens `https://localhost:47990`, and displays setup instructions in Notepad.
+6. In Apollo or Sunshine, open **Applications**, then edit your **Steam Big Picture** application entry. Paste the copied text into its **Command** field.
+7. Configure the Apollo/Sunshine application as shown below and **Save**.
 
-### Important Apollo application settings
+### Important Apollo/Sunshine application settings
 
 | Setting | Value |
 | --- | --- |
@@ -65,7 +65,7 @@ When Steam Big Picture is launched through a game-streaming host, exiting Big Pi
 | **Continue streaming until all app processes exit** | **Checked** |
 | **Undo Command** | **None** |
 
-**Both continuation checkboxes are important.** Disabling them caused unreliable Steam window cleanup and stream-disconnect problems during testing. Do not add an extra close command to Apollo: the installed launcher already handles cleanup.
+**Both continuation checkboxes are important.** Disabling them caused unreliable Steam window cleanup and stream-disconnect problems during testing. Do not add an extra close command to Apollo or Sunshine: the installed launcher already handles cleanup.
 
 The generated Command will resemble this (the installer supplies your actual Windows profile path):
 
@@ -75,7 +75,7 @@ powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\
 
 ## How it works
 
-1. Apollo launches the installed PowerShell script.
+1. Apollo or Sunshine launches the installed PowerShell script.
 2. The script temporarily changes the Windows Game Bar Guide-button setting and opens Steam Big Picture.
 3. Once Big Picture appears, it starts an independent, hidden cleanup helper.
 4. When Big Picture closes, the launcher finishes and restores the original Game Bar setting.
@@ -96,9 +96,9 @@ Changing the startup movie may restart Steam. The installer attempts to restart 
 
 **Steam's desktop window remains open**
 
-- Verify **both Apollo continuation checkboxes are checked**.
-- Remove any Apollo **Undo Command**, **Detached Commands**, and **Command Preparations** rows associated with this launcher.
-- Confirm Apollo's **Command** points to the generated `SteamBigPicture.ps1` file.
+- Verify **both applicable host continuation checkboxes are checked**.
+- Remove any Apollo/Sunshine **Undo Command**, **Detached Commands**, and **Command Preparations** rows associated with this launcher.
+- Confirm the Apollo/Sunshine **Command** points to the generated `SteamBigPicture.ps1` file.
 - Run another session and inspect the cleanup log:
 
   ```text
@@ -108,12 +108,12 @@ Changing the startup movie may restart Steam. The installer attempts to restart 
   To copy the last 200 lines to your clipboard, run this in PowerShell:
 
   ```powershell
-  Get-Content "$env:LOCALAPPDATA\Apollo\SteamBigPicture-Cleanup.log" -Tail 200 | Set-Clipboard
+  Get-Content "$env:LOCALAPPDATA\ESES\SteamBigPicture-Cleanup.log" -Tail 200 | Set-Clipboard
   ```
 
 **Artemis/Moonlight shows a disconnect error or the stream takes too long to end**
 
-Check the two continuation settings above, ensure there are no extra Undo Commands, and avoid running the launcher elevated. The cleanup helper should run separately rather than as an Apollo Undo Command.
+Check the two continuation settings above, ensure there are no extra Undo Commands, and avoid running the launcher elevated. The cleanup helper should run separately rather than as an Apollo/Sunshine Undo Command.
 
 **Big Picture doesn't launch**
 
@@ -130,13 +130,13 @@ The cleanup log is **overwritten for each new session**, not appended indefinite
 | `%LOCALAPPDATA%\ESES\SteamBigPicture.ps1` | Installed streaming launcher |
 | `%LOCALAPPDATA%\ESES\SteamBigPicture.ps1.bak` | Backup of an existing launcher when reinstalling |
 | `%LOCALAPPDATA%\ESES\SteamBigPicture-Cleanup.log` | Per-session diagnostic log |
-| `%TEMP%\SteamBigPicture-ESES-Instructions.txt` | Apollo setup instructions |
+| `%TEMP%\SteamBigPicture-ESES-Instructions.txt` | Apollo/Sunshine setup instructions |
 
 If selected, the optional startup-movie override is created inside Steam's `config\uioverrides\movies` folder.
 
 ## Uninstall
 
-1. In Apollo, remove this launcher's **Command** from the Steam Big Picture application entry, or restore your previous command.
+1. In Apollo or Sunshine, remove this launcher's **Command** from the Steam Big Picture application entry, or restore your previous command.
 2. Delete `%LOCALAPPDATA%\ESES\SteamBigPicture.ps1` if you no longer need it. You can also remove its `.bak` and the diagnostic log.
 3. If you enabled the optional startup-movie override, run the BAT file and choose to **restore** the original movie before deleting the installer.
 
@@ -144,7 +144,7 @@ The temporary Game Bar setting is designed to be restored when the launcher exit
 
 ## Notes
 
-This is a community utility and is **not affiliated with Valve, Steam, Apollo, Sunshine, Artemis, or Moonlight**. It is provided as-is. Review scripts before executing them, especially if your Steam or Apollo installation is customized.
+This is a community utility and is **not affiliated with Valve, Steam, Apollo, Sunshine, Artemis, or Moonlight**. It is provided as-is. Review scripts before executing them, especially if your Steam, Apollo, or Sunshine installation is customized.
 
 ## Feedback and issues
 
