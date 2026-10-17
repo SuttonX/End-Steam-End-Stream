@@ -51,9 +51,9 @@ When Steam Big Picture is launched through a game-streaming host, exiting Big Pi
 
 5. The installer copies the Apollo/Sunshine launch command to your clipboard, opens `https://localhost:47990`, and displays setup instructions in Notepad.
 6. In Apollo or Sunshine, open **Applications**, then edit your **Steam Big Picture** application entry. Paste the copied text into its **Command** field.
-7. Configure the Apollo/Sunshine application as shown below and **Save**.
+7. Configure the **Steam Big Picture** application in Apollo or Sunshine as shown below, then **Save**.
 
-### Important Apollo/Sunshine application settings
+### Important Steam Big Picture application settings
 
 | Setting | Value |
 | --- | --- |
@@ -82,7 +82,6 @@ powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\
 5. The helper looks for Steam's desktop window (`steamwebhelper.exe`, window title `Steam`) and sends a standard Windows `WM_CLOSE` message.
 6. When the desktop window is confirmed absent, the helper exits. **Steam remains running in the system tray.**
 
-The helper **does not send a second `steam://close/bigpicture` command** after Big Picture has already exited. This avoids the redundant command that caused problems in earlier versions.
 
 ## Optional: Disable or restore the startup movie
 
@@ -96,9 +95,9 @@ Changing the startup movie may restart Steam. The installer attempts to restart 
 
 **Steam's desktop window remains open**
 
-- Verify **both applicable host continuation checkboxes are checked**.
-- Remove any Apollo/Sunshine **Undo Command**, **Detached Commands**, and **Command Preparations** rows associated with this launcher.
-- Confirm the Apollo/Sunshine **Command** points to the generated `SteamBigPicture.ps1` file.
+- Verify **both streaming continuation checkboxes** are checked in the Steam Big Picture application settings.
+- Remove any **Undo Command**, **Detached Commands**, and **Command Preparations** rows from the Steam Big Picture application settings.
+- Confirm the Steam Big Picture application's **Command** points to the generated `SteamBigPicture.ps1` file.
 - Run another session and inspect the cleanup log:
 
   ```text
