@@ -1,4 +1,4 @@
-# Exit Steam End Stream
+# End Steam End Stream
 
 **One script, two automatic actions:** When you exit Steam Big Picture through its **Power menu**, this script **ends your Moonlight/Artemis streaming session AND closes the leftover Steam desktop window on the Windows host**. Steam itself stays running in the system tray—no need to manually close the window or terminate Steam.
 
@@ -6,7 +6,7 @@ Made for **Apollo/Sunshine hosts** and **Artemis/Moonlight clients**. The instal
 
 ## Quick start: Download and run the BAT
 
-1. **[Download `ExitSteamEndStream.bat`](https://raw.githubusercontent.com/SuttonX/End-Steam-End-Stream/main/ExitSteamEndStream.bat)** and save it to your Windows host PC.
+1. **[Download `EndSteamEndStream.bat`](https://raw.githubusercontent.com/SuttonX/End-Steam-End-Stream/main/EndSteamEndStream.bat)** and save it to your Windows host PC.
 2. **Double-click the downloaded BAT file** and follow the installer prompts. There is nothing to extract and no separate PowerShell script to download.
 3. Follow the Notepad instructions the installer opens to set up the **Steam Big Picture** application in Apollo. The installer also copies the application **Command** to your clipboard.
 4. Make sure **both Apollo continuation checkboxes** are enabled as shown below. Save the application settings.
@@ -40,7 +40,7 @@ When Steam Big Picture is launched through a game-streaming host, exiting Big Pi
 
 ## Installation
 
-1. **[Download `ExitSteamEndStream.bat`](https://raw.githubusercontent.com/SuttonX/End-Steam-End-Stream/main/ExitSteamEndStream.bat)** to your Windows host PC.
+1. **[Download `EndSteamEndStream.bat`](https://raw.githubusercontent.com/SuttonX/End-Steam-End-Stream/main/EndSteamEndStream.bat)** to your Windows host PC.
 2. **Double-click the BAT file to run it.** You can inspect the script before running it.
 3. If prompted, choose whether to disable Steam's Big Picture startup movie. This is optional. **If you choose to change the movie, the installer may restart Steam**, so close any active games first.
 4. The installer writes the launcher to:
