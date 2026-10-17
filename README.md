@@ -32,7 +32,7 @@ When Steam Big Picture is launched through a game-streaming host, exiting Big Pi
 
 - Windows 10 or 11
 - Steam installed on the host PC
-- [Apollo](https://github.com/ClassicOldSong/Apollo) installed and configured as the streaming host (built on [Sunshine](https://github.com/LizardByte/Sunshine))
+- [Apollo](https://github.com/ClassicOldSong/Apollo) **or** [Sunshine](https://github.com/LizardByte/Sunshine) installed and configured as the streaming host (tested with Apollo; Sunshine is expected to work but has not been independently tested)
 - An [Artemis](https://github.com/ClassicOldSong/moonlight-android) or [Moonlight](https://moonlight-stream.org/) streaming client (tested with Artemis)
 - Windows PowerShell 5.1 (included with supported Windows installations)
 
