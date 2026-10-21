@@ -1,4 +1,5 @@
 name: Publish v1.0.0 release
+# Trigger release after GitHub Actions was enabled
 on:
   push:
     branches: [main]
